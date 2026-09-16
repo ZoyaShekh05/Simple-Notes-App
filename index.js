@@ -43,15 +43,15 @@ function randorNotes() {
         const li = document.createElement("li")
         // const a = document.createElement("a")
 
-        li.className = "flex gap-2 border border-slate-400 p-4 rounded-xl bg-pink-200"
+        li.className = "flex gap-2 border border-slate-400 p-4 rounded-xl bg-pink-200   "
         li.dataset.id = note.id
         // <a href="#"  class="flex-1">${note.heading}</a>
 
         li.innerHTML = `<input type="checkbox" data-action = "toggle" ${note.isCompleted ? "checked" : ""}>
                          <p class="flex-1 cursor-pointer note-text">${note.heading}</p>
                 <div class="flex gap-2">
-                    <button data-action = "edit" class="px-2.5 py-1 text-xs font-medium text-pink-700 bg-purple-300 hover:bg-amber-100 rounded transition-colors cursor-pointer">Edit</button>
-                    <button data-action = "delete" class="px-2.5 py-1 text-xs font-medium text-rose-600 bg-pink-300 hover:bg-rose-100 rounded transition-colors cursor-pointer" >Delete</button>
+                    <button data-action = "edit" class="px-2.5 py-1 text-xs font-medium text-pink-700 bg-purple-300 hover:bg-amber-100 rounded transition-colors cursor-pointer sm:text-base ">Edit</button>
+                    <button data-action = "delete" class="px-2.5 py-1 text-xs font-medium text-rose-600 bg-pink-300 hover:bg-rose-100 rounded transition-colors cursor-pointer " >Delete</button>
                 </div>`
         notesList.append(li)
 
