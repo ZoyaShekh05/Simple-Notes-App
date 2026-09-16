@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen  bg-[linear-gradient(135deg,_purple,_pink,_blue)] flex justify-center items-center ">
+
+    <div
+        class="bg-white/15 backdrop-blur-md max-w-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 w-full">
+        <div class="bg-purple-400 py-7 px-16 text-white backdrop-blur-lg">
+            <h1 class="text-2xl font-bold tracking-wide">Notes App</h1>
+        </div>
+
+        <div class="p-8">
+            <input type="text" id="notes-heading" placeholder="Write heading here..."
+                class="max-w-full border border-slate-500 p-2 rounded-lg text-slate-800 focus:outline-none focus:border-pink-300 mb-2">
+            <form action="" class="flex  items-center gap-9" id="note-form">
+                <textarea name="text" id="notes-text"
+                    class="border border-slate-500 p-2 rounded-lg text-slate-800 w-64 max-w-full h-25 focus:outline-none   focus:border-pink-300"
+                    placeholder="Write your note here..."></textarea>
+                <div class="flex flex-col gap-2">
+                    <button
+                        class=" bg-blue-700 py-2 px-7 rounded-lg text-white hover:bg-blue-500 transition-colors         cursor-pointer"
+                        id="notes-btn">Add Note</button>
+
+                    <button type="button" id="cancel-btn"
+                        class="hidden self-end text-xs text-slate-500 hover:text-slate-700 underline cursor-pointer">
+                        Cancel Editing
+                    </button>
+                </div>
+            </form>
+
+
+            <div class="flex justify-between items-center py-3 text-slate-800 border-b border-slate-500">
+                <p id="tasks-count">TASKS (0)</p>
+                <P id="complete-count">COMPLETED: 0</P>
+            </div>
+
+            <ul class="mt-4 flex flex-col gap-3" id="notes-list">
+                <!-- <li data-id-1 class="flex gap-2 border border-slate-400 p-4 rounded-xl bg-pink-200">
+                <input type="checkbox">
+                <p class="flex-1">HTML NOTES</p>
+                <div class="flex gap-2">
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </li> -->
+
+            </ul>
+        </div>
+
+        <div id="note-view-box"
+            class=" p-5 mb-2 border border-dashed border-purple-400 rounded-xl bg-ehite/80 backdrop-blur-md hidden text-slate-800 shadow-md">
+            <h2 id="view-title" class="text-xl font-bold"></h2>
+            <p id="view-content" class="mt-2 text-base whitespace-pre-wrap"></p>
+        </div>
+    </div>
+
+
+    <script src="index.js"></script>
+</body>
+
+</html>
