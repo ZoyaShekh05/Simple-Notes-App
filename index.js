@@ -9,33 +9,36 @@ const viewTitle = document.querySelector("#view-title")
 const viewContent = document.querySelector("#view-content")
 const noteHeading = document.querySelector("#notes-heading")
 const cancelBtn = document.querySelector("#cancel-btn")
+const errorMessage = document.querySelector("#error-message")
 
-let notes = [
-    {
-        id: Date.now() + 1,
-        heading: "HTML",
-        content: "HTML ka full form.... HyperText Markup Language h. HTML ka use web pages ka structure banane ke liye kiya jata h.HTML tags webpage ke elements ko define krte hain . jaise h1 heading our p paragraph ke liye use hota hai.",
-        isCompleted: false
-    },
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
-    {
-        id: Date.now() + 2,
-        heading: "CSS",
-        content: "CSS ka full form.....Cascading Style Sheet hai. CSS ka use webpage ko design or style krne ke liye hota h ",
-        isCompleted: true
-    },
+// let notes = [
+//     {
+//         id: Date.now() + 1,
+//         heading: "HTML",
+//         content: "HTML ka full form.... HyperText Markup Language h. HTML ka use web pages ka structure banane ke liye kiya jata h.HTML tags webpage ke elements ko define krte hain . jaise h1 heading our p paragraph ke liye use hota hai.",
+//         isCompleted: false
+//     },
 
-    {
-        id: Date.now() + 3,
-        heading: "JavaScript",
-        content: "JavaScript ek programming language h. Iska use webpage ko intractive or dynamic banane ke liye hota h ....",
-        isCompleted: false
-    }
-]
+//     {
+//         id: Date.now() + 2,
+//         heading: "CSS",
+//         content: "CSS ka full form.....Cascading Style Sheet hai. CSS ka use webpage ko design or style krne ke liye hota h ",
+//         isCompleted: true
+//     },
+
+//     {
+//         id: Date.now() + 3,
+//         heading: "JavaScript",
+//         content: "JavaScript ek programming language h. Iska use webpage ko intractive or dynamic banane ke liye hota h ....",
+//         isCompleted: false
+//     }
+// ]
 
 let editNotesId = null
 
-function randorNotes() {
+function renderNotes() {
 
     notesList.innerHTML = ""
 
@@ -61,15 +64,19 @@ function randorNotes() {
     completeCount.textContent = `COMPLETED: ${notes.filter((note) => note.isCompleted).length}`
 
 }
-randorNotes()
+renderNotes()
 
 noteForm.addEventListener("submit", (e) => {
     e.preventDefault()
     const notesValue = notesText.value.trim()
     const headingValue = noteHeading.value.trim()
 
-    if (!notesValue) {
+    if (!notesValue || !headingValue) {
+          errorMessage.textContent = "Please enter both heading and note!"
+          errorMessage.classList.remove("hidden")
         return
+    }else{
+        errorMessage.classList.add("hidden")
     }
 
     console.log(editNotesId, notesValue);
@@ -84,7 +91,12 @@ noteForm.addEventListener("submit", (e) => {
                 }
             }
             return note
+           
         })
+        const li = document.querySelector(`li[data-id = "${editNotesId}"]`)
+        li.querySelector(".note-text").textContent = headingValue
+        //   notes = JSON.parse(localStorage.getItem("notes")) || [];
+        localStorage.setItem("notes" , JSON.stringify(notes)) ;
         viewTitle.innerHTML = headingValue;
         viewContent.innerHTML = notesValue;
         noteViewBox.classList.remove("hidden")
@@ -93,6 +105,8 @@ noteForm.addEventListener("submit", (e) => {
         editNotesId = null;
         notesBtn.textContent = "Add Note"
         notesBtn.className = " bg-blue-700 py-2 px-7 rounded-lg text-white hover:bg-blue-500 transition-colors cursor-pointer"
+        
+
     } else {
         let newNotes = {
             id: Date.now() + Math.random(),
@@ -100,15 +114,16 @@ noteForm.addEventListener("submit", (e) => {
             content: notesValue,
             isCompleted: false
         }
-
+        notes = JSON.parse(localStorage.getItem("notes")) || [];
         notes.push(newNotes)
-
-    }
+        localStorage.setItem("notes" , JSON.stringify(notes)) ;
+        
+    }      
     cancelEdit()
     // notesBtn.textContent = "Add Note"
     noteHeading.value = ""
     notesText.value = ""
-    randorNotes()
+    renderNotes()
 
     viewTitle.innerHTML = headingValue
     viewContent.innerHTML = notesValue
@@ -143,7 +158,9 @@ notesList.addEventListener("click", (e) => {
             }
             return note
         })
-        randorNotes()
+        //  notes = JSON.parse(localStorage.getItem("notes")) || [];
+        localStorage.setItem("notes" , JSON.stringify(notes))
+        renderNotes()
         return;
     }
 
@@ -171,7 +188,9 @@ function deleteNote(id) {
     viewContent.innerHTML = ""
     noteViewBox.classList.remove("block")
     noteViewBox.classList.add("hidden")
-    randorNotes()
+    //   notes = JSON.parse(localStorage.getItem("notes")) || [];
+    localStorage.setItem("notes" , JSON.stringify(notes))
+    renderNotes()
 }
 
 function startEdit(id) {

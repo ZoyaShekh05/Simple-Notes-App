@@ -8,15 +8,18 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="min-h-screen  bg-[linear-gradient(135deg,_purple,_pink,_blue)] flex justify-center items-center ">
+<body class="min-h-screen  bg-[linear-gradient(135deg,_purple,_pink,_blue)] flex justify-center items-center p-8">
+    <!-- w-full max-w-lg overflow-hidden rounded-2xl sm:rounded-3xl -->
 
-    <div
-        class="bg-white/15 backdrop-blur-md max-w-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 w-full min-w-sm">
+    <!-- <div
+        class="bg-white/15 backdrop-blur-md max-w-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 w-full min-w-sm"> -->
+
+        <div class="bg-white/15 backdrop-blur-md max-w-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 w-full ">
         <div class="bg-purple-400 py-7 px-16 text-white backdrop-blur-lg">
             <h1 class="text-2xl font-bold tracking-wide">Notes App</h1>
         </div>
 
-        <div class="p-8 w-full max-w-lg sm:p-6 ">
+        <div class="p-4 w-full max-w-lg sm:p-6 ">
 
             <!-- <form action="" class="flex flex-col gap-4 sm:flex-row sm:items-stretch" id="note-form"> -->
 
@@ -25,13 +28,15 @@
                 class="max-w-full border border-slate-500 p-2 rounded-lg text-slate-800 focus:outline-none focus:border-pink-300 mb-2">
 
 
-             <form action="" class="flex flex-col  gap-9 sm:flex-row items-stretch sm:items-center" id="note-form">
+            <form action="" class="flex flex-col  gap-9 sm:flex-row items-stretch sm:items-center sm:justify-between w-full" id="note-form">
 
+                <div class="flex flex-col max-w-full flex-1 gap-4">
+                    <textarea name="text" id="notes-text"
+                        class="border border-slate-500 p-2 rounded-lg text-slate-800   max-w-full focus:outline-none   focus:border-pink-300 w-full resize-none h-25 overflow-hidden"
+                        placeholder="Write your note here..."></textarea>
 
-                <textarea name="text" id="notes-text"
-                    class="border border-slate-500 p-2 rounded-lg text-slate-800 h-28  max-w-full h-25 focus:outline-none   focus:border-pink-300 w-full sm:h-32"
-                    placeholder="Write your note here..."></textarea>
-
+                    <p id="error-message" class="text-red-400 size-3  hidden font-medium w-full"></p>
+                </div>
 
                 <div class="flex flex-col gap-2 shrink-0">
                     <button
@@ -51,7 +56,7 @@
                 <P id="complete-count">COMPLETED: 0</P>
             </div>
 
-            <ul class="mt-4 flex flex-col gap-3" id="notes-list">
+            <ul class="mt-4 flex flex-col gap-3 " id="notes-list">
                 <!-- <li data-id-1 class="flex gap-2 border border-slate-400 p-4 rounded-xl bg-pink-200">
                 <input type="checkbox">
                 <p class="flex-1">HTML NOTES</p>
